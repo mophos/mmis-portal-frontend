@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                <span>ใบสั่งซื้อ</span>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                    <div style="display: flex; align-items: center; justify-content: center; margin-top:1em">
+                        <chart id="container" [options]="chartOptions_Orders"></chart>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                    <div class="padding__1em">
+                        <h6 class="color_Tomato">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <div style="float:right;">
+                                        ก่อนเตรียมใบสั่งซื้อ:
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <span class="label label-blue"> {{data_po[0]}} รายการ / {{data_po_price[0]| number:'.2'}} บาท </span>
+                                </div>
+                            </div>
+                        </h6><br>
+                        <h6 class="color_Turquoise">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <div style="float:right;">
+                                        เตรียมใบสั่งซื้อ:
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <span class="label label-blue"> {{data_po[1]}} รายการ / {{data_po_price[1]| number:'.2'}} บาท </span>
+                                </div>
+                            </div>
+                        </h6><br>
+                        <h6 class="color_SteelBlue">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <div style="float:right;">
+                                        ยืนยันการสั่งซื้อ:
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <span class="label label-blue"> {{data_po[2]}} รายการ / {{data_po_price[2]| number:'.2'}} บาท </span>
+                                </div>
+                            </div>
+                        </h6><br>
+                        <h6 class="color_Yellow">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <div style="float:right;">
+                                        อนุมัติ:
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <span class="label label-blue"> {{data_po[3]}} รายการ / {{data_po_price[3]| number:'.2'}} บาท </span>
+                                </div>
+                            </div>
+                        </h6><br>
+                        <h6 class="color_YellowGreen">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <div style="float:right;">
+                                        รับเข้าคลัง:
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <span class="label label-blue"> {{data_po[4]}} รายการ / {{data_po_price[4]| number:'.2'}} บาท </span>
+                                </div>
+                            </div>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                <span>เวชภัณฑ์ที่ถึงจุดสั่งซื้อ</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; margin-top:1em">
+                <chart id="container" [options]="chartOptions_purchase"></chart>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                <span>คงคลัง</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; margin-top:1em">
+                <chart id="container" [options]="chartOptions_Inventory"></chart>
+            </div>
+        </div>
+    </div>
+</div>

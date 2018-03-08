@@ -1,0 +1,73 @@
+<clr-main-container>
+    <clr-header class="header-6">
+        <div class="branding">
+            <a class="nav-link">
+                <img src="./assets/images/logo.png" alt="" width="80" style="margin-right:10px;">
+                <span class="title">MMIS@MOPH</span>
+            </a>
+        </div>
+
+        <div class="header-nav">
+            <a class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" routerLink='/portal/index' routerLinkActive='active' role="tooltip" aria-haspopup="true">
+                <clr-icon shape="home"></clr-icon>
+                <span class="tooltip-content">Home</span>
+            </a>
+            <a href="{{env.purchasingUrl}}" *ngIf="Purchasing" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+                <clr-icon shape="shopping-cart"></clr-icon>
+                <span class="tooltip-content">Purchasing</span>
+            </a>
+            <a href="{{env.planningUrl}}" *ngIf="Planning" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+                <clr-icon shape="event"></clr-icon>
+                <span class="tooltip-content">Planning</span>
+            </a>
+            <a href="{{env.inventoryUrl}}" *ngIf="Inventory || InventoryWarehouse" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+                <clr-icon shape="data-cluster"></clr-icon>
+                <span class="tooltip-content">Inventory</span>
+            </a>
+            <a href="{{env.materialsUrl}}" *ngIf="Materials" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+                <clr-icon shape="storage"></clr-icon>
+                <span class="tooltip-content">Materials</span>
+            </a>
+            <a href="{{env.contractsUrl}}" *ngIf="Contracts" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+                <clr-icon shape="scroll"></clr-icon>
+                <span class="tooltip-content">Contracts</span>
+            </a>
+            <a href="{{env.umUrl}}" *ngIf="Administrator" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+                <clr-icon shape="cog"></clr-icon>
+                <span class="tooltip-content">Administrator</span>
+            </a>
+            <!-- <a class=" nav-link nav-icon" routerLink='/portal/dashboard' routerLinkActive='active'>
+                <clr-icon shape="dashboard"></clr-icon>
+            </a> -->
+        </div>
+
+        <div class="header-actions">
+            <clr-dropdown class="dropdown bottom-right">
+                <button class="nav-text" clrDropdownToggle>
+                {{ fullname }}
+                <clr-icon shape="caret down"></clr-icon>
+            </button>
+                <div class="dropdown-menu">      
+                    <a (click)="logout()" clrDropdownItem>ออกจากระบบ</a>
+                </div>
+            </clr-dropdown>
+        </div>
+    </clr-header>
+    <nav class="subnav">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="javascript://" routerLink='/portal/index' routerLinkActive='active'>Portal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript://" routerLink='/portal/report' routerLinkActive='active'>Report</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="content-container">
+        <div class="content-area" style="padding-top:0;">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</clr-main-container>

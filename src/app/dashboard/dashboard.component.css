@@ -1,0 +1,29 @@
+#container {
+    height:90%;
+    width:90%;
+    position: sticky;
+}
+.color_Tomato{
+    color:Tomato;
+}
+.color_Turquoise{
+    color:Turquoise;
+}
+.color_SteelBlue{
+    color:SteelBlue;
+}
+.color_Orange{
+    color:Orange;
+}
+.color_YellowGreen{
+    color:YellowGreen;
+}
+.padding__1em{
+    padding:1em; 
+}
+.margin__lr__05em{
+    margin:0.5em; 
+}
+.padding__lr__05em{
+    padding:0.5em; 
+}

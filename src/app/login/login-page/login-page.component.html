@@ -1,0 +1,44 @@
+<clr-main-container>
+    <clr-header class="header-6">
+        <div class="branding">
+            <a class="nav-link">
+                <img src="./assets/images/logo.png" alt="" width="80" style="margin-right:10px;">
+                <span class="title">MMIS@MOPH </span>
+                
+            </a>
+        </div>
+        <div class="header-actions">
+            <clr-dropdown>
+              <button class="nav-text" clrDropdownTrigger>
+                คู่มือ
+                <clr-icon shape="caret down"></clr-icon>
+              </button>
+              <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                <a href="javascript://" (click)="showManualStaff()" clrDropdownItem>คู่มือเจ้าหน้าที่หน่วยเบิก/รพ.สต.</a>
+                <!-- <a href="javascript://" (click)="logout()" clrDropdownItem>ออกจากระบบ</a> -->
+              </clr-dropdown-menu>
+            </clr-dropdown>
+          </div>
+    </clr-header>
+    <div class="login-wrapper">
+        <form class="login">
+           <label class="title">
+           MMIS&#174;<span class="title" style="font-size: 1rem;margin-left:1rem;"> V.0.9.8</span> <span style="color:red;font-size:0.5rem">update 7/2/2561 10.00 </span>
+        </label>
+        
+            <div class="login-group">
+                <input (keypress)="enterLogin($event)" class="username" [(ngModel)]="username" type="text" name="login_username" placeholder="Username">
+                <input (keypress)="enterLogin($event)" class="password" [(ngModel)]="password" type="password" name="login_password" placeholder="Password">
+                <div style="text-align: center" *ngIf="isLogging">
+                    <span class="spinner spinner-inline">
+                  Loading...
+              </span>
+                    <span>
+                  Logging in...
+              </span>
+                </div>
+                <button type="button" (click)="doLogin()" class="btn btn-primary" [disabled]="!username || !password || isLogging">LOG IN</button>
+            </div>
+        </form>
+    </div>
+</clr-main-container>

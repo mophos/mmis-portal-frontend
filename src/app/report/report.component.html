@@ -1,0 +1,120 @@
+<div class="card-columns card-columns-2">
+  <div class="card">
+    <div class="card-header">
+      <clr-icon shape="shopping-cart"></clr-icon>
+      Purchasing
+    </div>
+    <div class="card-block">
+      <ul class="list">
+        <li>พิมพ์ใบสรุปรายการเวชภัณฑ์ที่สั่งซื้อ
+          <button style="float: right;" (click)="purchasingReport1()" class="btn btn-sm btn-link">
+            <clr-icon shape="printer"></clr-icon> พิมพ์
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <clr-icon shape="data-cluster"></clr-icon>
+      Inventory
+    </div>
+    <div class="card-block">
+      <ul class="list">
+        <li>รายงานสินค้าคงเหลือ
+          <button style="float: right;" (click)="purchasingReport1()" class="btn btn-sm btn-link">
+            <clr-icon shape="printer"></clr-icon> พิมพ์
+          </button>
+        </li>
+        <li>รายงานสินค้าใกล้หมดอายุ
+          <button style="float: right;" (click)="purchasingReport1()" class="btn btn-sm btn-link">
+            <clr-icon shape="printer"></clr-icon> พิมพ์
+          </button>
+        </li>
+        <li>รายงานการผลิต
+          <button style="float: right;" (click)="purchasingReport1()" class="btn btn-sm btn-link">
+            <clr-icon shape="printer"></clr-icon> พิมพ์
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <clr-icon shape="storage"></clr-icon>
+      Material
+    </div>
+    <div class="card-block">
+      <ul class="list">
+        ไม่มีข้อมูล
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <clr-icon shape="scroll"></clr-icon>
+      Contracts
+    </div>
+    <div class="card-block">
+      <ul class="list">
+        ไม่มีข้อมูล
+      </ul>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="pReport1" [clrModalSize]="'xl'">
+  <h3 class="modal-title">พิมพ์ใบสรุปรายการเวชภัณฑ์ที่สั่งซื้อ</h3>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+        <label>เลือกประเภท</label>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+        <div class="form-group">
+          <div class="select">
+            <select name="bgdetailId" id="bgdetailId" [(ngModel)]="bgdetailId">
+              <option *ngFor="let w of bgsubType" value="{{w.bgdetail_id}}">{{w.bgtypesub_name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+        <label style="font-size: 10pt;">เลือกสถานะใบสั่งซื้อ</label>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+        <div class="form-group">
+          <div class="select">
+            <select name="statusPo" id="statusPo" [(ngModel)]="statusPo">
+              <option value="PREPARED">เตรียมใบสั่งซื้อ</option>
+              <option value="CONFIRMED">ยืนยันการสั่งซื้อ</option>
+              <option value="APPROVED">อนุมัติใบสั่งซื้อ</option>
+              <option value="COMPLETED">รับเข้าคลัง</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+        <label for="">วันที่เริ่มต้น</label>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+        <my-date-picker-th name="startDate" [(ngModel)]="startDate" [options]="myDatePickerOptions"></my-date-picker-th>
+      </div>
+      <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+        <label for="">วันที่สิ้นสุด</label>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+        <my-date-picker-th name="endDate" [(ngModel)]="endDate" [options]="myDatePickerOptions"></my-date-picker-th>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="pReport1 = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="printReport1()">Ok</button>
+  </div>
+</clr-modal>
+
+<wm-html-preview #htmlPreview></wm-html-preview>
