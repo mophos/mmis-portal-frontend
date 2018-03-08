@@ -1,0 +1,14 @@
+<h1> History </h1>
+<clr-datagrid>
+    <clr-dg-column>Date</clr-dg-column>
+    <clr-dg-column>Action Name</clr-dg-column>
+    <clr-dg-column>System</clr-dg-column>
+    <clr-dg-column>User ID</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let log of logs" [clrDgItem]="log">
+        <clr-dg-cell>{{log.log_time}}</clr-dg-cell>
+        <clr-dg-cell>{{log.action_id}}</clr-dg-cell>
+        <clr-dg-cell>{{log.system_id}}</clr-dg-cell>
+        <clr-dg-cell>{{log.user_id}}</clr-dg-cell>
+    </clr-dg-row>
+</clr-datagrid>

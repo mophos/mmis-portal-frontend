@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ClarityModule } from '@clr/angular';
+import { ClarityModule } from 'clarity-angular';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { HelperModule } from '../helper/helper.module';
