@@ -29,6 +29,7 @@
         "angular2-highcharts": "^0.5.5",
         "angular2-jwt": "^0.2.3",
         "angular2-text-mask": "^8.0.4",
+        "clarity-angular": "^0.10.27",
         "classlist.js": "^1.1.20150312",
         "core-js": "^2.5.0",
         "lodash": "^4.17.4",

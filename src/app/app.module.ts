@@ -6,14 +6,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClarityModule } from '@clr/angular';
+import { AdministratorModule } from './administrator/administrator.module';
+import { ClarityModule } from 'clarity-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
+// import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { environment } from '../environments/environment';
 
 import { LoginModule } from './login/login.module';
+import { AdminModule } from './admin/admin.module';
 import { AuthGuard } from './auth-guard.service';
 import { AlertService } from './alert.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -31,8 +34,6 @@ import { MaterialService } from './services/material.service';
 import { ContractsService } from './services/contracts.service';
 import { HelperModule } from './helper/helper.module';
 
-import '@clr/icons';
-import '@clr/icons/shapes/all-shapes';
 
 @NgModule({
   declarations: [
@@ -49,9 +50,11 @@ import '@clr/icons/shapes/all-shapes';
     HttpModule,
     ClarityModule.forRoot(),
     ChartModule,
+    AdministratorModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     LoginModule,
+    AdminModule,
     MyDatePickerTHModule,
     HelperModule
   ],
