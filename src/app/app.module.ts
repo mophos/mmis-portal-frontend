@@ -10,7 +10,6 @@ import { ClarityModule } from '@clr/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
-// import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { environment } from '../environments/environment';
 
