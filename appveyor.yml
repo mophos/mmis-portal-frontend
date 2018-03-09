@@ -15,7 +15,7 @@ test_script:
   # Output useful info for debugging.
   - node --version
   - npm --version
-  # run tests
+  # run build
   - ng build --build-optimizer --prod
 
 # Don't actually build.
