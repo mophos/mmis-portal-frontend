@@ -1,0 +1,15 @@
+<h1>Systems</h1>
+<div class="row">
+    <div *ngFor="let s of systems" class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+        <div class="card clickable" [routerLink]="['/administrator/systems/view/',s.system_id]">
+
+            <div class="card-block text-center">
+                <clr-icon shape="storage" class="is-highlight" size="120"></clr-icon>
+                <h3 class="card-title text-center">{{s.system_id}}</h3>
+            </div>
+            <div class="card-footer text-center">
+                <a href="#" class="btn btn-sm btn-link">{{s.system_name}}</a>
+            </div>
+        </div>
+    </div>
+</div>

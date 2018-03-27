@@ -1,0 +1,214 @@
+<h1> {{system.system_id}}</h1>
+
+<clr-tabs>
+    <clr-tab>
+        <button clrTabLink id="link1">Detail</button>
+        <clr-tab-content id="content1" *clrIfActive="true">
+                <clr-stack-view>
+                    <clr-stack-header></clr-stack-header>
+                    <clr-stack-block>
+                        <clr-stack-label>Service ID:</clr-stack-label>
+                        <clr-stack-content>{{system.system_id}}</clr-stack-content>
+                    </clr-stack-block>
+                    <clr-stack-block>
+                        <clr-stack-label>Service Name:</clr-stack-label>
+                        <clr-stack-content>{{system.system_name}}</clr-stack-content>
+                    </clr-stack-block>
+                    <clr-stack-block>
+                        <clr-stack-label>Description:</clr-stack-label>
+                        <clr-stack-content>{{system.description}}</clr-stack-content>
+                    </clr-stack-block>
+                </clr-stack-view>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink id="link2" >Services</button>
+        <clr-tab-content id="content2">
+            <button (click)="addNewService()" type="submit" class="btn btn-sm" style="float:right;">
+                <clr-icon shape="add"></clr-icon> Add Service
+            </button>
+            <clr-datagrid>
+                <clr-dg-column>Service ID</clr-dg-column>
+                <clr-dg-column>Service Name</clr-dg-column>
+                <clr-dg-column>Is Enable</clr-dg-column>
+                <clr-dg-column>Actions</clr-dg-column>
+    
+                <clr-dg-row *clrDgItems="let s of services" [clrDgItem]="s">
+                    <clr-dg-cell>{{s.service_id}}</clr-dg-cell>
+                    <clr-dg-cell>{{s.service_name}}</clr-dg-cell>
+                    <clr-dg-cell *ngIf="s.enable === 1">
+                        <clr-icon shape="success" class="is-success"></clr-icon>
+                    </clr-dg-cell>
+                    <clr-dg-cell *ngIf="s.enable === 0">
+                        <clr-icon shape="close" class="is-error"></clr-icon>
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <button class="label label-success clickable" (click)="editService(s)">แก้ไข</button>
+                        <button class="label label-danger clickable" (click)="removeService(s)">ลบ</button>
+                    </clr-dg-cell>
+                </clr-dg-row>
+            </clr-datagrid>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink id="link3" >Roles</button>
+        <clr-tab-content id="content3">
+            <button (click)="addNewRole()" type="submit" class="btn btn-sm" style="float:right;">
+            <clr-icon shape="add"></clr-icon> Add Role
+            </button>
+            <clr-datagrid>
+                <clr-dg-column>Role ID</clr-dg-column>
+                <clr-dg-column>Role Name</clr-dg-column>
+                <clr-dg-column>Description</clr-dg-column>
+                <clr-dg-column>Actions</clr-dg-column>
+
+                <clr-dg-row *clrDgItems="let r of roles" [clrDgItem]="r">
+
+                    <clr-dg-cell>{{r.role_id}}</clr-dg-cell>
+                    <clr-dg-cell>{{r.role_name}}</clr-dg-cell>
+                    <clr-dg-cell>{{r.desc}}</clr-dg-cell>
+
+                    <clr-dg-cell>
+                        <button class="label label-success clickable" (click)="editRole(r)">แก้ไข</button>
+                        <button class="label label-danger clickable" (click)="removeRole(r)">ลบ</button>
+                    </clr-dg-cell>
+                </clr-dg-row>
+            </clr-datagrid>
+        </clr-tab-content>
+    </clr-tab>  
+
+    
+
+    
+    
+</clr-tabs>
+
+
+<clr-modal [(clrModalOpen)]="serviceOpened" [clrModalClosable]="false">
+    <h3 class="modal-title">{{isUpdate==true?'Update':'Create'}}: Service</h3>
+    <div class="modal-body">
+        <form>
+            <section class="form-block">
+                <label>System: {{system.system_id}}: {{system.system_name}}</label>
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="service_id"> Service ID </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="text" name="service_id" [(ngModel)]="service_id" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="service_name"> service_name </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="text" required name="service_name" [(ngModel)]="service_name">
+                        <input type="hidden" required name="system_id" [(ngModel)]="system_id">
+                    </div>
+                </div>
+
+                <!--<div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="system_id"> System </label>
+                    </div>
+                    <div class="select">
+                        <select disabled name="system_id" [(ngModel)]="system_id">
+                            <option *ngFor="let s of systems" [value]="s.system_id">{{s.system_id}}: {{ s.system_name }}</option>
+                        </select>
+                    </div>
+                </div>-->
+
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label for="description"> Description </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <textarea required name="description" [(ngModel)]="description">
+                        </textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label for="enable"> Active </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="checkbox" required name="enable" [(ngModel)]="enable">
+                    </div>
+                </div>
+
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+
+        <button type="button" class="btn btn-default-outline" (click)="serviceOpened = false">
+            Cancel
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveService()" [disabled]="!service_id || !service_name">
+            Save
+        </button>
+
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="roleOpened" [clrModalClosable]="false">
+    <h3 class="modal-title">{{isUpdate==true?'Update':'Create'}}: Role</h3>
+    <div class="modal-body">
+        <form>
+            <section class="form-block">
+                <label>{{system.system_id}}: {{system.system_name}}</label>
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="role_id"> Role ID </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="text" name="role_id" [(ngModel)]="role_id" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="role_name"> Role Name </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="text" required name="role_name" [(ngModel)]="role_name">
+                        <input type="hidden" required name="system_id" [(ngModel)]="system_id">
+                    </div>
+                </div>
+
+                <!--<div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="system_id"> System </label>
+                    </div>
+                    <div class="select">
+                        <select disabled name="system_id" [(ngModel)]="system_id">
+                            <option *ngFor="let s of systems" [value]="s.system_id">{{s.system_id}}: {{ s.system_name }}</option>
+                        </select>
+                    </div>
+                </div>-->
+
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label for="desc"> Description </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <textarea required name="desc" [(ngModel)]="desc">
+                        </textarea>
+                    </div>
+                </div>
+
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default-outline" (click)="roleOpened = false">
+            Cancel
+        </button>
+        <button type="button" class="btn btn-primary" (click)="saveRole()" [disabled]="!role_id || !role_name">
+            Save
+        </button>
+    </div>
+</clr-modal>

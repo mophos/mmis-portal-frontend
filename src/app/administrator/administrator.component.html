@@ -1,0 +1,110 @@
+<clr-main-container>
+    <clr-header class="header-5">
+        <div class="branding">
+            <a class="nav-link">
+                <clr-icon shape="network-settings"></clr-icon>
+                <span class="title">Administrator</span>
+            </a>
+        </div>
+        <div class="header-nav">
+            <a class=" nav-link nav-icon" routerLink='/portal/index' routerLinkActive='active'>
+                <clr-icon shape="home"> </clr-icon>
+            </a>
+        </div>
+        <div class="header-actions">
+            <clr-dropdown clrMenuPosition="bottom-right">
+                <button class="nav-icon" clrDropdownToggle>
+                <clr-icon shape="cog"></clr-icon>
+                <clr-icon shape="caret down"></clr-icon>
+                </button>
+                <div class="dropdown-menu">
+                    <a clrDropdownItem>{{fullname}}</a>
+                    <a clrDropdownItem (click)="logout()">ออกจากระบบ</a>
+                </div>
+            </clr-dropdown>
+        </div>
+    </clr-header>
+    <nav class="sub-nav" [clr-nav-level]="1">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#" routerLink='/administrator/index' routerLinkActive='active'>Administrator</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" routerLink='/administrator/systems' routerLinkActive='active'>Systems</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" routerLink='/administrator/account' routerLinkActive='active'>Accounts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" routerLink='/administrator/history' routerLinkActive='active'>History</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="content-container">
+        <div class="content-area">
+            <router-outlet></router-outlet>
+        </div>
+        <nav class="sidenav">
+            <!--<clr-tree-node [clrTreeNodeExpanded]="true">
+                <b>Systems</b>
+                <clr-tree-node>
+                    MOPH-EDI
+                    <clr-tree-node>
+                        <a routerLink="/administrator/systems/mophedi-services" class="clr-treenode-link" routerLinkActive="active">
+                            <clr-icon shape="vm"></clr-icon>Services
+                        </a>
+                    </clr-tree-node>
+                    <clr-tree-node>
+                        <a routerLink="/administrator/systems/mophedi-role" class="clr-treenode-link" routerLinkActive="active">
+                            <clr-icon shape="tools"></clr-icon>Roles
+                        </a>
+                    </clr-tree-node>
+                </clr-tree-node>
+                <clr-tree-node>
+                    MOPHIS
+                    <clr-tree-node>
+                        <a routerLink="/administrator/systems/mophis-services" class="clr-treenode-link" routerLinkActive="active">
+                            <clr-icon shape="vm"></clr-icon>Services
+                        </a>
+                    </clr-tree-node>
+                    <clr-tree-node>
+                        <a routerLink="/administrator/systems/mophis-role" class="clr-treenode-link" routerLinkActive="active">
+                            <clr-icon shape="tools"></clr-icon>Roles
+                        </a>
+                    </clr-tree-node>
+                </clr-tree-node>
+                <clr-tree-node>
+                    NMPCD
+                    <clr-tree-node>
+                        <a routerLink="/administrator/systems/nmpcd-services" class="clr-treenode-link" routerLinkActive="active">
+                            <clr-icon shape="vm"></clr-icon>Services
+                        </a>
+                    </clr-tree-node>
+                    <clr-tree-node>
+                        <a routerLink="/administrator/systems/nmpcd-role" class="clr-treenode-link" routerLinkActive="active">
+                            <clr-icon shape="tools"></clr-icon>Roles
+                        </a>
+                    </clr-tree-node>
+                </clr-tree-node>
+            </clr-tree-node>-->
+            <br>
+            <clr-tree-node>
+                <a routerLink="/administrator/systems" class="clr-treenode-link" routerLinkActive="active">
+                    <clr-icon shape="users"></clr-icon>Systems
+                </a>
+            </clr-tree-node>
+            <clr-tree-node>
+                <a routerLink="/administrator/account" class="clr-treenode-link" routerLinkActive="active">
+                    <clr-icon shape="users"></clr-icon>Accounts
+                </a>
+            </clr-tree-node>
+            <clr-tree-node>
+                <a routerLink="/administrator/history" class="clr-treenode-link" routerLinkActive="active">
+                    <clr-icon shape="history"></clr-icon>History
+                </a>
+            </clr-tree-node>
+
+        </nav>
+    </div>
+</clr-main-container>

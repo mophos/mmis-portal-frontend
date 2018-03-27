@@ -1,0 +1,97 @@
+<h1> Accounts </h1>
+<button class="btn btn-primary rignt" (click)="addNew()">เพิ่มผู้ใช้งาน</button>
+<clr-datagrid>
+    <clr-dg-column>User ID</clr-dg-column>
+    <clr-dg-column>Username</clr-dg-column>
+    <clr-dg-column>Email</clr-dg-column>
+    <clr-dg-column>Register Date</clr-dg-column>
+    <clr-dg-column>Is Active</clr-dg-column>
+    <clr-dg-column>Actions</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let user of users" [clrDgItem]="user">
+        <clr-dg-cell>{{user.user_id}}</clr-dg-cell>
+        <clr-dg-cell>{{user.username}}</clr-dg-cell>
+        <clr-dg-cell>{{user.email}}</clr-dg-cell>
+        <clr-dg-cell>{{user.register_date}}</clr-dg-cell>
+        <clr-dg-cell *ngIf="user.enable === 1">
+            <clr-icon shape="success" class="is-success"></clr-icon>
+        </clr-dg-cell>
+        <clr-dg-cell *ngIf="user.enable === 0">
+            <clr-icon shape="close" class="is-error"></clr-icon>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <button class="label label-success clickable" (click)="update(user)"> 
+          แก้ไข
+      </button>
+            <button class="label label-danger clickable" (click)="remove(user)">
+          ลบ
+      </button>
+        </clr-dg-cell>
+    </clr-dg-row>
+</clr-datagrid>
+
+
+<clr-modal [(clrModalOpen)]="opened" [clrModalClosable]="false">
+    <h3 class="modal-title">เพิ่ม/แก้ไข ข้อมูลผู้ใช้งาน</h3>
+    <div class="modal-body">
+
+        <form>
+            <section class="form-block">
+
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="username"> Username </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="text" name="username" [(ngModel)]="username" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="password"> Password </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="password" required name="password" [(ngModel)]="password">
+                        <input type="hidden" name="oldPassword" [(ngModel)]="oldPassword">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="email"> Email </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="email" required name="email" [(ngModel)]="email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="fullname"> Fullname </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="text" required name="fullname" [(ngModel)]="fullname">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <label class="required" for="enable"> Active </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                        <input type="checkbox" required name="enable" [(ngModel)]="enable">
+                    </div>
+                </div>
+
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+
+        <button type="button" class="btn btn-primary" (click)="save()" [disabled]="!username || !password || !email">
+            บันทึก
+        </button>
+        <button type="button" class="btn btn-danger-outline" (click)="opened = false">
+            ปิด
+        </button>
+    </div>
+</clr-modal>
