@@ -22,6 +22,7 @@ export class LayoutComponent implements OnInit {
   Contracts = false;
   Administrator = false;
 
+
   constructor(private router: Router) {
     this.fullname = sessionStorage.getItem('fullname');
   }
