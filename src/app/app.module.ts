@@ -1,5 +1,3 @@
-import { DashboardService } from './services/dashboard.service';
-import { PurchasingService } from './services/purchasing.service';
 import { BrowserModule,  } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -26,13 +24,16 @@ declare var require: any; // highcharts
 import { ChartModule } from 'angular2-highcharts'
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { ReportComponent } from './report/report.component';
-import { InventoryService } from './services/inventory.service';
-import { MaterialService } from './services/material.service';
-import { ContractsService } from './services/contracts.service';
 import { HelperModule } from './helper/helper.module';
 
 import '@clr/icons';
 import '@clr/icons/shapes/all-shapes';
+import { InventoryService } from './services/inventory.service';
+import { MaterialService } from './services/material.service';
+import { ContractsService } from './services/contracts.service';
+import { DashboardService } from './services/dashboard.service';
+import { PurchasingService } from './services/purchasing.service';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import '@clr/icons/shapes/all-shapes';
     ReportComponent
   ],
   imports: [
+    AuthModule,
     BrowserModule,
     FormsModule,
     HttpModule,

@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 
-@Injectable()
+// @Injectable()
 export class DashboardService {
   tokenKey = sessionStorage.getItem('token');
   url = '';
@@ -49,5 +49,4 @@ export class DashboardService {
   //       });
   //   });
   // }
-
 }
