@@ -1,19 +1,20 @@
-import { DashboardService } from './services/dashboard.service';
-import { PurchasingService } from './services/purchasing.service';
-import { BrowserModule,  } from '@angular/platform-browser';
+import { BrowserModule, } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClarityModule } from '@clr/angular';
+import { AdministratorModule } from './administrator/administrator.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
+import { ClarityModule } from '@clr/angular';
+// import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { environment } from '../environments/environment';
 
 import { LoginModule } from './login/login.module';
+import { AdminModule } from './admin/admin.module';
 import { AuthGuard } from './auth-guard.service';
 import { AlertService } from './alert.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -26,13 +27,16 @@ declare var require: any; // highcharts
 import { ChartModule } from 'angular2-highcharts'
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { ReportComponent } from './report/report.component';
-import { InventoryService } from './services/inventory.service';
-import { MaterialService } from './services/material.service';
-import { ContractsService } from './services/contracts.service';
 import { HelperModule } from './helper/helper.module';
 
 import '@clr/icons';
 import '@clr/icons/shapes/all-shapes';
+import { InventoryService } from './services/inventory.service';
+import { MaterialService } from './services/material.service';
+import { ContractsService } from './services/contracts.service';
+import { DashboardService } from './services/dashboard.service';
+import { PurchasingService } from './services/purchasing.service';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -44,14 +48,17 @@ import '@clr/icons/shapes/all-shapes';
     ReportComponent
   ],
   imports: [
+    AuthModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     ClarityModule.forRoot(),
     ChartModule,
+    AdministratorModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     LoginModule,
+    AdminModule,
     MyDatePickerTHModule,
     HelperModule
   ],
