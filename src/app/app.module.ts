@@ -33,6 +33,7 @@ import { HelperModule } from './helper/helper.module';
 
 import '@clr/icons';
 import '@clr/icons/shapes/all-shapes';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import '@clr/icons/shapes/all-shapes';
     ReportComponent
   ],
   imports: [
+    AuthModule,
     BrowserModule,
     FormsModule,
     HttpModule,
