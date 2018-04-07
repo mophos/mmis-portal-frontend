@@ -16,7 +16,7 @@ export class LoginPageComponent implements OnInit {
   password: string;
   jwtHelper: JwtHelper = new JwtHelper();
   isLogging = false;
-
+  version: any;
   constructor(
     @Inject('API_URL') private url: string,
     private loginService: LoginService,
@@ -28,6 +28,7 @@ export class LoginPageComponent implements OnInit {
     if (sessionStorage.getItem('token')) {
       this.router.navigate(['portal']);
     }
+    this.getVersion();
   }
 
   enterLogin(event) {
@@ -67,5 +68,11 @@ export class LoginPageComponent implements OnInit {
   showManualStaff() {
     const url = this.url + '/pdf/HowTo(staff).pdf';
     window.open(url, '_blank');
+  }
+  async getVersion() {
+    const rs: any = await this.loginService.getVersion();
+    if (rs.ok) {
+      this.version = rs.version;
+    }
   }
 }
