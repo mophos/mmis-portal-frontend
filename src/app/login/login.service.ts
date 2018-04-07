@@ -12,7 +12,7 @@ export class LoginService {
 
   doLogin(username: string, password: string) {
     return new Promise((resolve, reject) => {
-       this.http.post(`${this.umUrl}/login`, { username: username, password: password})
+      this.http.post(`${this.umUrl}/login`, { username: username, password: password })
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -33,6 +33,17 @@ export class LoginService {
       } else {
         reject('Invalid username/password');
       }
+    });
+  }
+  getVersion() {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.url}/version`)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
     });
   }
 }
