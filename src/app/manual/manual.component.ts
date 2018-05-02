@@ -23,4 +23,14 @@ export class ManualComponent implements OnInit {
     const url = `${this.apiUrl}/pdf/ManualStaff.pdf`;
     window.open(url, '_blank');
   }
+
+  downloadTemplate() {
+    const url = `${this.apiUrl}/pdf/template.xlsx`;
+    window.open(url, '_blank');
+  }
+
+  downloadTemplateBlank() {
+    const url = `${this.apiUrl}/pdf/template_blank.xlsx`;
+    window.open(url, '_blank');
+  }
 }
