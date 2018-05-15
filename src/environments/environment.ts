@@ -13,6 +13,6 @@ export const environment = {
   umUrl: 'http://mmis.moph.go.th/um',
   contractsUrl: '/',
   apiUrl: 'http://localhost:3007',
-  umLoginUrl: 'http://localhost:3004'
+  umLoginUrl: 'http://localhost:3020'
 
 };

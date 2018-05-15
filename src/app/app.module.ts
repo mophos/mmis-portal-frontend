@@ -10,7 +10,6 @@ import { ClarityModule } from '@clr/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MyDatePickerTHModule } from 'mydatepicker-th';
-// import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { environment } from '../environments/environment';
 
@@ -34,6 +33,8 @@ import { HelperModule } from './helper/helper.module';
 
 import '@clr/icons';
 import '@clr/icons/shapes/all-shapes';
+import { AuthModule } from './auth/auth.module';
+import { ManualComponent } from './manual/manual.component';
 
 @NgModule({
   declarations: [
@@ -42,9 +43,11 @@ import '@clr/icons/shapes/all-shapes';
     PortalComponent,
     LayoutComponent,
     DashboardComponent,
-    ReportComponent
+    ReportComponent,
+    ManualComponent
   ],
   imports: [
+    AuthModule,
     BrowserModule,
     FormsModule,
     HttpModule,

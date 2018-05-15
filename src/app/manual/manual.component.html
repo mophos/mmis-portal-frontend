@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-header">
+    <clr-icon shape="shopping-cart"></clr-icon>
+    คู่มือ
+  </div>
+  <div class="card-block">
+    <ul class="list">
+      <li>คู่มือคลังใหญ่
+        <button style="float: right;" (click)="downloadManualAdmin()" class="btn btn-sm btn-link">
+          <clr-icon shape="printer"></clr-icon> พิมพ์
+        </button>
+      </li>
+      <li>คู่มือหน่วยเบิก
+        <button style="float: right;" (click)="downloadManualStaff()" class="btn btn-sm btn-link">
+          <clr-icon shape="printer"></clr-icon> พิมพ์
+        </button>
+      </li>
+      <li>คู่มือการใช้งานแยกตามโมดูล
+        <button style="float: right;" (click)="downloadManualModule()" class="btn btn-sm btn-link">
+          <clr-icon shape="printer"></clr-icon> พิมพ์
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <clr-icon shape="shopping-cart"></clr-icon>
+    Template นำเข้าข้อมูล
+  </div>
+  <div class="card-block">
+    <ul class="list">
+      <li>Template นำเข้าข้อมูล.xlsx (ตัวอย่าง)
+        <button style="float: right;" (click)="downloadTemplate()" class="btn btn-sm btn-link">
+          <clr-icon shape="download"></clr-icon> ดาวน์โหลด
+        </button>
+      </li>
+      <li>Template นำเข้าข้อมูล.xlsx
+        <button style="float: right;" (click)="downloadTemplateBlank()" class="btn btn-sm btn-link">
+          <clr-icon shape="download"></clr-icon> ดาวน์โหลด
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
