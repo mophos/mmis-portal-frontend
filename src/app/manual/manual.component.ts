@@ -33,4 +33,9 @@ export class ManualComponent implements OnInit {
     const url = `${this.apiUrl}/pdf/template_blank.xlsx`;
     window.open(url, '_blank');
   }
+
+  downloadManualModule() {
+    const url = `${this.apiUrl}/pdf/manual_module.pdf`;
+    window.open(url, '_blank');
+  }
 }
