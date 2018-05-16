@@ -45,7 +45,7 @@ export class ManualComponent implements OnInit {
   }
 
   downloadMigrateMac() {
-    const url = `${this.apiUrl}/program/MirgrateOSX.rar`;
+    const url = `${this.apiUrl}/program/MirgrateOSX.zip`;
     window.open(url, '_blank');
   }
 }
