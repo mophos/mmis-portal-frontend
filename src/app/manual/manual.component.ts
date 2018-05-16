@@ -38,4 +38,14 @@ export class ManualComponent implements OnInit {
     const url = `${this.apiUrl}/pdf/manual_module.pdf`;
     window.open(url, '_blank');
   }
+
+  downloadMigrateWin() {
+    const url = `${this.apiUrl}/program/Migrate.rar`;
+    window.open(url, '_blank');
+  }
+
+  downloadMigrateMac() {
+    const url = `${this.apiUrl}/program/MirgrateOSX.rar`;
+    window.open(url, '_blank');
+  }
 }
