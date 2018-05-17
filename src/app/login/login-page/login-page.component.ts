@@ -53,7 +53,7 @@ export class LoginPageComponent implements OnInit {
       const accessRight = decodedToken.accessRight;
       const rights = accessRight.split(',');
       if (_.indexOf(rights, 'WM_WAREHOUSE_ADMIN') > -1) {
-        location.href = '/inventory';
+        location.href = '/inventory/#/';
       } else {
         this.router.navigate(['portal']);
       }
