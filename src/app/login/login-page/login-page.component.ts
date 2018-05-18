@@ -85,10 +85,10 @@ export class LoginPageComponent implements OnInit {
       if (rs.ok) {
         this.hospitalName = rs.hospitalName || 'โรงพยาบาลตัวอย่าง';
       } else {
-        this.alert.error();
+        console.log(rs.error);
       }
     } catch (error) {
-      this.alert.error();
+      console.log(error);
     }
 
   }
