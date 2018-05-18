@@ -46,4 +46,9 @@ export class LoginService {
         });
     });
   }
+
+  async getHospitalInfo() {
+    const rs = await this.http.get(`${this.url}/login/hospital`).toPromise();
+    return rs.json();
+  }
 }

@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -17,6 +18,7 @@ export class LoginPageComponent implements OnInit {
   jwtHelper: JwtHelper = new JwtHelper();
   isLogging = false;
   version: any;
+  hospitalName: any = 'โรงพยาบาลตัวอย่าง';
   constructor(
     @Inject('API_URL') private url: string,
     private loginService: LoginService,
@@ -29,6 +31,7 @@ export class LoginPageComponent implements OnInit {
       this.router.navigate(['portal']);
     }
     this.getVersion();
+    this.getHospitalInfo();
   }
 
   enterLogin(event) {
@@ -74,5 +77,19 @@ export class LoginPageComponent implements OnInit {
     if (rs.ok) {
       this.version = rs.version;
     }
+  }
+
+  async getHospitalInfo() {
+    try {
+      const rs: any = await this.loginService.getHospitalInfo();
+      if (rs.ok) {
+        this.hospitalName = rs.hospitalName || 'โรงพยาบาลตัวอย่าง';
+      } else {
+        this.alert.error();
+      }
+    } catch (error) {
+      this.alert.error();
+    }
+
   }
 }
