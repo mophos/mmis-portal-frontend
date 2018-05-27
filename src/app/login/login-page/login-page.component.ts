@@ -24,14 +24,15 @@ export class LoginPageComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private alert: AlertService
-  ) { }
+  ) {
+    this.getHospitalInfo();
+    this.getVersion();
+  }
 
   ngOnInit() {
     if (sessionStorage.getItem('token')) {
       this.router.navigate(['portal']);
     }
-    this.getVersion();
-    this.getHospitalInfo();
   }
 
   enterLogin(event) {
