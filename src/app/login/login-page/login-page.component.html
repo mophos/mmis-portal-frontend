@@ -32,8 +32,14 @@
             </label>
 
             <div class="login-group">
-                <input (keypress)="enterLogin($event)" class="username" [(ngModel)]="username" type="text" name="login_username" placeholder="Username">
+                <input (keypress)="enterLogin($event)" (keyup)="selectWarehouse($event)" class="username" [(ngModel)]="username" type="text"
+                    name="login_username" placeholder="Username">
                 <input (keypress)="enterLogin($event)" class="password" [(ngModel)]="password" type="password" name="login_password" placeholder="Password">
+                <div class="select">
+                    <select [(ngModel)]="warehouseId" name="warehouseId">
+                        <option *ngFor="let w of warehouses" [value]="w.warehouse_id">{{w.warehouse_name}}</option>
+                    </select>
+                </div>
                 <div style="text-align: center" *ngIf="isLogging">
                     <span class="spinner spinner-inline">
                         Loading...
@@ -42,7 +48,7 @@
                         Logging in...
                     </span>
                 </div>
-                <button type="button" (click)="doLogin()" class="btn btn-primary" [disabled]="!username || !password || isLogging">LOG IN</button>
+                <button type="button" (click)="doLogin()" class="btn btn-primary" [disabled]="!warehouseId || !username || !password || isLogging">LOG IN</button>
             </div>
         </form>
     </div>

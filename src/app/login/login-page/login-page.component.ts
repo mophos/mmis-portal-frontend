@@ -18,7 +18,9 @@ export class LoginPageComponent implements OnInit {
   jwtHelper: JwtHelper = new JwtHelper();
   isLogging = false;
   version: any;
-  hospitalName: any = 'โรงพยาบาลตัวอย่าง';
+  hospitalName: any;
+  warehouses = [];
+  warehouseId: any;
   constructor(
     @Inject('API_URL') private url: string,
     private loginService: LoginService,
@@ -42,9 +44,22 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  async selectWarehouse(event) {
+    const rs: any = await this.loginService.searchWarehouse(this.username);
+    if (rs.ok) {
+      this.warehouses = rs.rows;
+      this.warehouseId = rs.rows[0].warehouse_id;
+    } else {
+      this.warehouses = [];
+      this.warehouseId = null;
+    }
+    console.log(this.warehouseId);
+
+  }
+
   async doLogin() {
     this.isLogging = true;
-    const rs: any = await this.loginService.doLogin(this.username, this.password);
+    const rs: any = await this.loginService.doLogin(this.username, this.password, this.warehouseId);
     if (rs.ok) {
       const decodedToken = this.jwtHelper.decodeToken(rs.token);
       const fullname = `${decodedToken.fullname}`;
@@ -84,7 +99,7 @@ export class LoginPageComponent implements OnInit {
     try {
       const rs: any = await this.loginService.getHospitalInfo();
       if (rs.ok) {
-        this.hospitalName = rs.hospitalName || 'โรงพยาบาลตัวอย่าง';
+        this.hospitalName = rs.hospitalName || 'ไม่สามารถติดต่อฐานข้อมูลได้';
       } else {
         console.log(rs.error);
       }
