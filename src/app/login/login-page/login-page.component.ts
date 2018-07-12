@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit {
   version: any;
   hospitalName: any;
   warehouses = [];
-  warehouseId: any;
+  userWarehouseId: any;
   constructor(
     @Inject('API_URL') private url: string,
     private loginService: LoginService,
@@ -48,18 +48,16 @@ export class LoginPageComponent implements OnInit {
     const rs: any = await this.loginService.searchWarehouse(this.username);
     if (rs.ok) {
       this.warehouses = rs.rows;
-      this.warehouseId = rs.rows[0].warehouse_id;
+      this.userWarehouseId = rs.rows[0].user_warehouse_id;
     } else {
       this.warehouses = [];
-      this.warehouseId = null;
+      this.userWarehouseId = null;
     }
-    console.log(this.warehouseId);
-
   }
 
   async doLogin() {
     this.isLogging = true;
-    const rs: any = await this.loginService.doLogin(this.username, this.password, this.warehouseId);
+    const rs: any = await this.loginService.doLogin(this.username, this.password, this.userWarehouseId);
     if (rs.ok) {
       const decodedToken = this.jwtHelper.decodeToken(rs.token);
       const fullname = `${decodedToken.fullname}`;
