@@ -3,21 +3,11 @@
         <div class="branding">
             <a class="nav-link">
                 <img src="./assets/images/logo.png" alt="" width="80" style="margin-right:10px;">
-                <span class="title">MMIS@MOPH </span>
-
+                <!-- <span class="title">MMIS@MOPH </span> -->
+                <span class="title">
+                    <a href="http://mmis.moph.go.th" style="color: white ">MMIS@MOPH</a>
+                </span>
             </a>
-        </div>
-        <div class="header-actions">
-            <clr-dropdown>
-                <button class="nav-text" clrDropdownTrigger>
-                    คู่มือ
-                    <clr-icon shape="caret down"></clr-icon>
-                </button>
-                <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                    <a href="javascript://" (click)="showManualStaff()" clrDropdownItem>คู่มือเจ้าหน้าที่หน่วยเบิก/รพ.สต.</a>
-                    <!-- <a href="javascript://" (click)="logout()" clrDropdownItem>ออกจากระบบ</a> -->
-                </clr-dropdown-menu>
-            </clr-dropdown>
         </div>
     </clr-header>
     <div class="login-wrapper">
@@ -49,6 +39,9 @@
                     </span>
                 </div>
                 <button type="button" (click)="doLogin()" class="btn btn-primary" [disabled]="!userWarehouseId || !username || !password || isLogging">LOG IN</button>
+            </div>
+            <div style="margin-top: 50%;text-align: center ">
+                <a href="http://mmis.moph.go.th"> mmis.moph.go.th</a>
             </div>
         </form>
     </div>
