@@ -5,14 +5,14 @@
 
 export const environment = {
   production: false,
-  purchasingUrl: 'http://mmis.moph.go.th/purchasing',
-  planningUrl: 'http://mmis.moph.go.th/planning',
-  inventoryUrl: 'http://mmis.moph.go.th/inventory',
-  materialsUrl: 'http://mmis.moph.go.th/inventory',
+  purchasingUrl: 'http://localhost:4004',
+  planningUrl: 'http://localhost:4010',
+  inventoryUrl: 'http://localhost:4002',
+  materialsUrl: 'http://localhost:4006',
   reportUrl: 'http://mmis.moph.go.th/reports',
-  umUrl: 'http://mmis.moph.go.th/um',
-  contractsUrl: '/',
-  apiUrl: 'http://localhost:3007',
-  umLoginUrl: 'http://localhost:3004'
+  umUrl: 'http://localhost:4014',
+  contractsUrl: 'http://localhost:4008',
+  apiUrl: 'http://localhost:4015',
+  umLoginUrl: 'http://localhost:4013'
 
 };

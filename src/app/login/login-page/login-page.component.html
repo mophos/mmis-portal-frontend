@@ -3,42 +3,45 @@
         <div class="branding">
             <a class="nav-link">
                 <img src="./assets/images/logo.png" alt="" width="80" style="margin-right:10px;">
-                <span class="title">MMIS@MOPH </span>
-                
+                <!-- <span class="title">MMIS@MOPH </span> -->
+                <span class="title">
+                    <a href="http://mmis.moph.go.th" style="color: white ">MMIS@MOPH</a>
+                </span>
             </a>
         </div>
-        <div class="header-actions">
-            <clr-dropdown>
-              <button class="nav-text" clrDropdownTrigger>
-                คู่มือ
-                <clr-icon shape="caret down"></clr-icon>
-              </button>
-              <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                <a href="javascript://" (click)="showManualStaff()" clrDropdownItem>คู่มือเจ้าหน้าที่หน่วยเบิก/รพ.สต.</a>
-                <!-- <a href="javascript://" (click)="logout()" clrDropdownItem>ออกจากระบบ</a> -->
-              </clr-dropdown-menu>
-            </clr-dropdown>
-          </div>
     </clr-header>
     <div class="login-wrapper">
         <form class="login">
-           <label class="title">
-           MMIS&#174;<span class="title" style="font-size: 1rem;margin-left:1rem;"> V.1.0.0</span> 
-<!--              <span style="color:red;font-size:0.5rem">update 7/2/2561 10.00 </span> -->
-        </label>
-        
+            <label class="title">
+                <h3 class="welcome">ยินดีต้อนรับ
+                </h3>
+                {{hospitalName}}
+                <h5 class="hint">
+                    MMIS&#174; {{version}}
+                </h5>
+            </label>
+
             <div class="login-group">
-                <input (keypress)="enterLogin($event)" class="username" [(ngModel)]="username" type="text" name="login_username" placeholder="Username">
+                <input (keypress)="enterLogin($event)" (keyup)="selectWarehouse($event)" class="username" [(ngModel)]="username" type="text"
+                    name="login_username" placeholder="Username">
                 <input (keypress)="enterLogin($event)" class="password" [(ngModel)]="password" type="password" name="login_password" placeholder="Password">
+                <div class="select">
+                    <select [(ngModel)]="userWarehouseId" name="userWarehouseId">
+                        <option *ngFor="let w of warehouses" [value]="w.user_warehouse_id">{{w.warehouse_name}} - {{w.warehouse_type}}</option>
+                    </select>
+                </div>
                 <div style="text-align: center" *ngIf="isLogging">
                     <span class="spinner spinner-inline">
-                  Loading...
-              </span>
+                        Loading...
+                    </span>
                     <span>
-                  Logging in...
-              </span>
+                        Logging in...
+                    </span>
                 </div>
-                <button type="button" (click)="doLogin()" class="btn btn-primary" [disabled]="!username || !password || isLogging">LOG IN</button>
+                <button type="button" (click)="doLogin()" class="btn btn-primary" [disabled]="!userWarehouseId || !username || !password || isLogging">LOG IN</button>
+            </div>
+            <div style="margin-top: 50%;text-align: center ">
+                <a href="http://mmis.moph.go.th"> mmis.moph.go.th</a>
             </div>
         </form>
     </div>

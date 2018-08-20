@@ -10,9 +10,9 @@ export class LoginService {
     @Inject('UM_LOGIN_URL') private umUrl: string,
     private http: Http) { }
 
-  doLogin(username: string, password: string) {
+  doLogin(username: string, password: string, userWarehouseId) {
     return new Promise((resolve, reject) => {
-       this.http.post(`${this.umUrl}/login`, { username: username, password: password})
+      this.http.post(`${this.umUrl}/login`, { username: username, password: password, userWarehouseId: userWarehouseId })
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -25,6 +25,18 @@ export class LoginService {
     // return rs;
   }
 
+  searchWarehouse(username: string) {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.umUrl}/login/warehouse/search?username=${username}`)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
   testLogin(username: string, password: string) {
     return new Promise((resolve, reject) => {
       if (username === 'admin' && password === 'admin') {
@@ -34,5 +46,21 @@ export class LoginService {
         reject('Invalid username/password');
       }
     });
+  }
+  getVersion() {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.url}/version`)
+        .map(res => res.json())
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
+  async getHospitalInfo() {
+    const rs = await this.http.get(`${this.url}/login/hospital`).toPromise();
+    return rs.json();
   }
 }

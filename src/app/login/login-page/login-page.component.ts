@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -16,13 +17,19 @@ export class LoginPageComponent implements OnInit {
   password: string;
   jwtHelper: JwtHelper = new JwtHelper();
   isLogging = false;
-
+  version: any;
+  hospitalName: any;
+  warehouses = [];
+  userWarehouseId: any;
   constructor(
     @Inject('API_URL') private url: string,
     private loginService: LoginService,
     private router: Router,
     private alert: AlertService
-  ) { }
+  ) {
+    this.getHospitalInfo();
+    this.getVersion();
+  }
 
   ngOnInit() {
     if (sessionStorage.getItem('token')) {
@@ -37,9 +44,20 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  async selectWarehouse(event) {
+    const rs: any = await this.loginService.searchWarehouse(this.username);
+    if (rs.ok) {
+      this.warehouses = rs.rows;
+      this.userWarehouseId = rs.rows[0].user_warehouse_id;
+    } else {
+      this.warehouses = [];
+      this.userWarehouseId = null;
+    }
+  }
+
   async doLogin() {
     this.isLogging = true;
-    const rs: any = await this.loginService.doLogin(this.username, this.password);
+    const rs: any = await this.loginService.doLogin(this.username, this.password, this.userWarehouseId);
     if (rs.ok) {
       const decodedToken = this.jwtHelper.decodeToken(rs.token);
       const fullname = `${decodedToken.fullname}`;
@@ -52,7 +70,7 @@ export class LoginPageComponent implements OnInit {
       const accessRight = decodedToken.accessRight;
       const rights = accessRight.split(',');
       if (_.indexOf(rights, 'WM_WAREHOUSE_ADMIN') > -1) {
-        location.href = '/inventory';
+        location.href = '/inventory/#/';
       } else {
         this.router.navigate(['portal']);
       }
@@ -67,5 +85,25 @@ export class LoginPageComponent implements OnInit {
   showManualStaff() {
     const url = this.url + '/pdf/HowTo(staff).pdf';
     window.open(url, '_blank');
+  }
+  async getVersion() {
+    const rs: any = await this.loginService.getVersion();
+    if (rs.ok) {
+      this.version = rs.version;
+    }
+  }
+
+  async getHospitalInfo() {
+    try {
+      const rs: any = await this.loginService.getHospitalInfo();
+      if (rs.ok) {
+        this.hospitalName = rs.hospitalName || 'ไม่สามารถติดต่อฐานข้อมูลได้';
+      } else {
+        console.log(rs.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 }
