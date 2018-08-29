@@ -24,6 +24,23 @@
 .margin__lr__05em{
     margin:0.5em; 
 }
+.margin__lr__1em{
+    margin-left:1em;
+    margin-right:1em;  
+}
 .padding__lr__05em{
     padding:0.5em; 
+}
+.padding__05em{
+    padding: 0.5em
+}
+.padding__tb__1em{
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.margin__1em{
+    margin:1em;
+}
+.center{
+    text-align: center;
 }
