@@ -21,6 +21,8 @@ export class LayoutComponent implements OnInit {
   Materials = false;
   Contracts = false;
   Administrator = false;
+  token: any;
+  warehouseName: any;
 
   constructor(private router: Router) {
     this.fullname = sessionStorage.getItem('fullname');
@@ -46,18 +48,18 @@ export class LayoutComponent implements OnInit {
     const token = sessionStorage.getItem('token');
     const decodedToken = this.jwtHelper.decodeToken(token);
     const accessRight = decodedToken.accessRight;
+    this.warehouseName = decodedToken.warehouseName
     this.rights = accessRight.split(',');
 
-    this.Purchasing =  _.indexOf(this.rights, 'PO_ADMIN') === -1 ? false : true;
-    this.Planning =  _.indexOf(this.rights, 'BM_ADMIN') === -1 ? false : true;
-    this.Inventory =  _.indexOf(this.rights, 'WM_ADMIN') === -1 ? false : true;
-    this.InventoryWarehouse =  _.indexOf(this.rights, 'WM_WAREHOUSE_ADMIN') === -1 ? false : true;
-    this.Materials =  _.indexOf(this.rights, 'MM_ADMIN') === -1 ? false : true;
-    this.Contracts =  _.indexOf(this.rights, 'CM_ADMIN') === -1 ? false : true;
-    this.Administrator =  _.indexOf(this.rights, 'UM_ADMIN') === -1 ? false : true;
+    this.Purchasing = _.indexOf(this.rights, 'PO_ADMIN') === -1 ? false : true;
+    this.Planning = _.indexOf(this.rights, 'BM_ADMIN') === -1 ? false : true;
+    this.Inventory = _.indexOf(this.rights, 'WM_ADMIN') === -1 ? false : true;
+    this.InventoryWarehouse = _.indexOf(this.rights, 'WM_WAREHOUSE_ADMIN') === -1 ? false : true;
+    this.Materials = _.indexOf(this.rights, 'MM_ADMIN') === -1 ? false : true;
+    this.Contracts = _.indexOf(this.rights, 'CM_ADMIN') === -1 ? false : true;
+    this.Administrator = _.indexOf(this.rights, 'UM_ADMIN') === -1 ? false : true;
     // console.log(this.rights);
     // console.log(_.indexOf(this.rights, 'PO_ADMIN'));
-    
   }
 
 }
