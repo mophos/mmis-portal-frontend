@@ -387,8 +387,8 @@ export class DashboardComponent implements OnInit {
           rotation: -90,
           color: '#FFFFFF',
           align: 'right',
-          format: '{point.y:.2f}', // one decimal
-          y: 10, // 10 pixels down from the top
+          format: '{point.y:.2f}',
+          y: 10,
           style: {
             fontSize: '13px',
             fontFamily: 'Verdana, sans-serif'
