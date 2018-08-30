@@ -218,6 +218,7 @@ export class DashboardComponent implements OnInit {
         }
       },
       series: [{
+        "colorByPoint": true,
         name: 'รายการที่ถึงจุดสั่งซื้อ',
         data: data_count
       }]
@@ -382,6 +383,7 @@ export class DashboardComponent implements OnInit {
       series: [{
         name: 'Population',
         data: data_count,
+        "colorByPoint": true,
         dataLabels: {
           enabled: true,
           rotation: -90,

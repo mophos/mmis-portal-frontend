@@ -87,15 +87,25 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-header">
-                <span>ประวัติการใช้งบประมาณ</span>
-                <span style="float: right;">
-                    <div class="select">
-                        <select [(ngModel)]="selectedBudgetDetailId" name="bgDetailId" (change)="getBudgetTransaction()">
-                            <option value="">งบประมาณทั้งหมด</option>
-                            <option [value]="b.bgdetail_id" *ngFor="let b of budgetList">{{b.budget_desc}}</option>
-                        </select>
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <span>ประวัติการใช้งบประมาณ</span>
                     </div>
-                </span>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <span style="float: right;">
+                            <div style="display: inline-block;">
+                                <button class="btn btn-sm btn-primary margin__lr__1em" (click)="dayOrmonth(1)">วัน</button>
+                                <button class="btn btn-sm btn-success" (click)="dayOrmonth(2)" style="margin-right:3em">เดือน</button>
+                            </div>
+                            <div style="display: inline-block;" class="select">
+                                <select [(ngModel)]="selectedBudgetDetailId" name="bgDetailId" (change)="getBudgetTransaction()">
+                                    <option value="">งบประมาณทั้งหมด</option>
+                                    <option [value]="b.bgdetail_id" *ngFor="let b of budgetList">{{b.budget_desc}}</option>
+                                </select>
+                            </div>
+                        </span>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
@@ -117,35 +127,38 @@
                                 required></my-date-picker-th>
                         </div>
                     </div>
-                    <div style="float: right;" class="margin__1em clr-row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <button class="btn btn-sm btn-primary margin__lr__1em" (click)="dayOrmonth(1)">วัน</button>
-                            <button class="btn btn-sm btn-primary margin__lr__1em" (click)="dayOrmonth(2)">เดือน</button>
-                        </div>
-                    </div>
                     <div class="margin__1em row">
-                        <div *ngIf="selectedBudgetDetailId" class="row" style="padding-left:3em">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                งบจัดสรร {{BudgetAll| number:'1.2-2'}} บาท
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngIf="selectedBudgetDetailId">
+                            <div class="row margin__1em" style="border-width:3px;border-style:solid;border-color: SteelBlue;font-size: 17px">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    งบจัดสรร
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <span style="float: right;">{{BudgetAll| number:'1.2-2'}} บาท</span>
+                                </div>
                             </div>
-                        </div>
-                        <div *ngIf="selectedBudgetDetailId" class="row" style="padding-left:3em">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                งบที่ถูกใช้ {{BudgetAmount | number:'1.2-2'}} บาท
+                            <div class="row margin__1em" style="border-width:3px;border-style:solid;border-color: Tomato;font-size: 17px">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    งบที่ถูกใช้
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <span style="float: right;">{{BudgetAmount | number:'1.2-2'}} บาท</span>
+                                </div>
                             </div>
-                        </div>
-                        <div *ngIf="selectedBudgetDetailId" class="row" style="padding-left:3em">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                จำนวนคงเหลือ {{BudgetAll-BudgetAmount | number:'1.2-2'}} บาท
+                            <div class="row margin__1em" style="border-width:3px;border-style:solid;border-color: YellowGreen;font-size: 17px">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    จำนวนคงเหลือ
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <span style="float: right;">{{BudgetAll-BudgetAmount | number:'1.2-2'}} บาท</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- <div class="row">
+        <!-- <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="card-header">
@@ -157,62 +170,74 @@
             </div>
         </div>
     </div> -->
-<div class="row">
-    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                <span>มูลค่าคงคลัง</span>
-                <span style="float: right;">
-                    รวม บาท
-                </span>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: center; margin-top:1em">
-                <chart id="container" [options]="inventoryValue"></chart>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="card-header">
-                <span>รับเข้าคลัง/รายการเบิก</span>
-            </div>
-            <div class="card-block margin__1em">
-                <div class="row padding__tb__1em">
-                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                        <span>จำนวนใบสั่งซื้อที่รอรับเข้าคลัง </span>
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span>มูลค่าคงคลัง</span>
+                        <span style="float: right;">
+                            รวม บาท
+                        </span>
                     </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                        <span style="float: right;font-size: 20px"> {{poApproved}} รายการ</span>
-                    </div>
-                </div>
-                <div class="row padding__tb__1em">
-                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                        <span>จำนวนรายการขอเบิก </span>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                        <span style="float: right;font-size: 20px"> {{ordersWaiting}} รายการ</span>
-                    </div>
-                </div>
-                <div class="row padding__tb__1em">
-                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                        <span>จำนวนรายการเบิกที่รออนุมัติ </span>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                        <span style="float: right;font-size: 20px"> {{ordersWaitingApprove}} รายการ</span>
-                    </div>
-                </div>
-                <div class="row padding__tb__1em">
-                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                        <span>จำนวนรายการเบิกที่มีการค้างจ่าย </span>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                        <span style="float: right;font-size: 20px"> {{ordersUnpaid}} รายการ</span>
+                    <div style="display: flex; align-items: center; justify-content: center; margin-top:1em">
+                        <chart id="container" [options]="inventoryValue"></chart>
                     </div>
                 </div>
             </div>
-            <!-- <div class="center padding__1em">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span>รับเข้าคลัง/รายการเบิก</span>
+                    </div>
+                    <div class="card-block margin__1em">
+                        <div class="row padding__tb__1em">
+                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                <span>จำนวนใบสั่งซื้อที่รอรับเข้าคลัง </span>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div style="float: right;font-size: 20px">
+                                    <span style="color:chocolate">{{poApproved}}</span>
+                                    <span>รายการ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row padding__tb__1em">
+                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                <span>จำนวนรายการขอเบิก </span>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div style="float: right;font-size: 20px">
+                                    <span style="color:dodgerblue">{{ordersWaiting}}</span>
+                                    <span>รายการ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row padding__tb__1em">
+                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                <span>จำนวนรายการเบิกที่รออนุมัติ </span>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div style="float: right;font-size: 20px">
+                                    <span style="color:goldenrod">{{ordersWaitingApprove}}</span>
+                                    <span>รายการ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row padding__tb__1em">
+                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                <span>จำนวนรายการเบิกที่มีการค้างจ่าย </span>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div style="float: right;font-size: 20px">
+                                    <span style="color:firebrick">{{ordersUnpaid}}</span>
+                                    <span>รายการ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="center padding__1em">
                 <span style="font-size: 10pc">{{poApproved}}</span>
             </div> -->
+                </div>
+            </div>
         </div>
-    </div>
-</div>
