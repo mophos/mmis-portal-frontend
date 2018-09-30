@@ -6,6 +6,7 @@ import { LoginService } from '../login.service';
 import { AlertService } from '../../alert.service';
 import { JwtHelper } from 'angular2-jwt';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
 @Component({
     selector: 'app-login-page',
@@ -22,6 +23,7 @@ export class LoginPageComponent implements OnInit {
     hospitalName: any;
     warehouses = [];
     userWarehouseId: any;
+    dateTime: any;
     constructor(
         @Inject('API_URL') private url: string,
         private loginService: LoginService,
@@ -30,6 +32,8 @@ export class LoginPageComponent implements OnInit {
     ) {
         this.getHospitalInfo();
         this.getVersion();
+        moment.locale('TH');
+        this.dateTime = moment().format('DD MMMM ') + (+moment().format('YYYY') + 543) + ' ' + moment().format('HH:mm') + ' น.'
     }
 
     ngOnInit() {
