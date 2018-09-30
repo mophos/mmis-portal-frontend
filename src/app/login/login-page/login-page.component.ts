@@ -103,7 +103,7 @@ export class LoginPageComponent implements OnInit {
             const rs: any = await this.loginService.getHospitalInfo();
             if (rs.ok) {
                 this.hospitalName = rs.hospitalName || 'ไม่สามารถติดต่อฐานข้อมูลได้';
-                this.budgetYear = rs.budgetYear;
+                this.budgetYear = +rs.budgetYear + 543;
             } else {
                 console.log(rs.error);
             }
