@@ -17,17 +17,19 @@
                 </h3>
                 {{hospitalName}}
                 <h5 class="hint">
-                    MMIS&#174; {{version}}
+                    MMIS&#174; {{version}} (ปีงบประมาณ {{budgetYear}})
                 </h5>
             </label>
 
             <div class="login-group">
-                <input (keypress)="enterLogin($event)" (keyup)="selectWarehouse($event)" class="username" [(ngModel)]="username" type="text"
-                    name="login_username" placeholder="Username">
-                <input (keypress)="enterLogin($event)" class="password" [(ngModel)]="password" type="password" name="login_password" placeholder="Password">
+                <input (keypress)="enterLogin($event)" (keyup)="selectWarehouse($event)" class="username" [(ngModel)]="username"
+                    type="text" name="login_username" placeholder="Username">
+                <input (keypress)="enterLogin($event)" class="password" [(ngModel)]="password" type="password" name="login_password"
+                    placeholder="Password">
                 <div class="select">
                     <select [(ngModel)]="userWarehouseId" name="userWarehouseId">
-                        <option *ngFor="let w of warehouses" [value]="w.user_warehouse_id">{{w.warehouse_name}} - {{w.warehouse_type}}</option>
+                        <option *ngFor="let w of warehouses" [value]="w.user_warehouse_id">{{w.warehouse_name}} -
+                            {{w.warehouse_type}}</option>
                     </select>
                 </div>
                 <div style="text-align: center" *ngIf="isLogging">
@@ -38,7 +40,8 @@
                         Logging in...
                     </span>
                 </div>
-                <button type="button" (click)="doLogin()" class="btn btn-primary" [disabled]="!userWarehouseId || !username || !password || isLogging">LOG IN</button>
+                <button type="button" (click)="doLogin()" class="btn btn-primary" [disabled]="!userWarehouseId || !username || !password || isLogging">LOG
+                    IN</button>
             </div>
             <div style="margin-top: 50%;text-align: center ">
                 <a href="http://mmis.moph.go.th"> mmis.moph.go.th</a>
