@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="Purchasing">
     <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-header">
@@ -28,7 +28,8 @@
                                     <div>
                                         เตรียมใบสั่งซื้อ:
                                     </div>
-                                    <span class="label label-blue"> {{data_po[1]}} รายการ / {{data_po_price[1]| number:'1.2-2'}}
+                                    <span class="label label-blue"> {{data_po[1]}} รายการ / {{data_po_price[1]|
+                                        number:'1.2-2'}}
                                         บาท </span>
                                 </div>
                             </div>
@@ -39,7 +40,8 @@
                                     <div>
                                         ยืนยันการสั่งซื้อ:
                                     </div>
-                                    <span class="label label-blue"> {{data_po[2]}} รายการ / {{data_po_price[2]| number:'1.2-2'}}
+                                    <span class="label label-blue"> {{data_po[2]}} รายการ / {{data_po_price[2]|
+                                        number:'1.2-2'}}
                                         บาท </span>
                                 </div>
                             </div>
@@ -50,7 +52,8 @@
                                     <div>
                                         อนุมัติ:
                                     </div>
-                                    <span class="label label-blue"> {{data_po[3]}} รายการ / {{data_po_price[3]| number:'1.2-2'}}
+                                    <span class="label label-blue"> {{data_po[3]}} รายการ / {{data_po_price[3]|
+                                        number:'1.2-2'}}
                                         บาท </span>
                                 </div>
                             </div>
@@ -61,7 +64,8 @@
                                     <div>
                                         รับเข้าคลัง:
                                     </div>
-                                    <span class="label label-blue"> {{data_po[4]}} รายการ / {{data_po_price[4]| number:'1.2-2'}}
+                                    <span class="label label-blue"> {{data_po[4]}} รายการ / {{data_po_price[4]|
+                                        number:'1.2-2'}}
                                         บาท </span>
                                 </div>
                             </div>
@@ -83,7 +87,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="Planning">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="card-header">
@@ -116,15 +120,15 @@
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     <div style="padding:1em">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <my-date-picker-th name="mydate" (dateChanged)="onStartDateChanged($event)" [options]="myDatePickerOptions" [(ngModel)]="startDate"
-                                required></my-date-picker-th>
+                            <my-date-picker-th name="mydate" (dateChanged)="onStartDateChanged($event)" [options]="myDatePickerOptions"
+                                [(ngModel)]="startDate" required></my-date-picker-th>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <label for="endDate" class="required">ถึง</label>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <my-date-picker-th name="mydate" (dateChanged)="oneEndDateChanged($event)" [options]="myDatePickerOptions" [(ngModel)]="endDate"
-                                required></my-date-picker-th>
+                            <my-date-picker-th name="mydate" (dateChanged)="oneEndDateChanged($event)" [options]="myDatePickerOptions"
+                                [(ngModel)]="endDate" required></my-date-picker-th>
                         </div>
                     </div>
                     <div class="margin__1em row">
@@ -158,7 +162,9 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row">
+    </div>
+</div>
+<!-- <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="card-header">
@@ -170,74 +176,74 @@
             </div>
         </div>
     </div> -->
-        <div class="row">
-            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="card-header">
-                        <span>มูลค่าคงคลัง</span>
-                        <span style="float: right;">
-                            รวม บาท
-                        </span>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: center; margin-top:1em">
-                        <chart id="container" [options]="inventoryValue"></chart>
-                    </div>
-                </div>
+<div class="row" *ngIf="Inventory || InventoryWarehouse || Requisition">
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                <span>มูลค่าคงคลัง</span>
+                <span style="float: right;">
+                    รวม บาท
+                </span>
             </div>
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="card-header">
-                        <span>รับเข้าคลัง/รายการเบิก</span>
-                    </div>
-                    <div class="card-block margin__1em">
-                        <div class="row padding__tb__1em">
-                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                                <span>จำนวนใบสั่งซื้อที่รอรับเข้าคลัง </span>
-                            </div>
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <div style="float: right;font-size: 20px">
-                                    <span style="color:chocolate">{{poApproved}}</span>
-                                    <span>รายการ</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row padding__tb__1em">
-                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                                <span>จำนวนรายการขอเบิก </span>
-                            </div>
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <div style="float: right;font-size: 20px">
-                                    <span style="color:dodgerblue">{{ordersWaiting}}</span>
-                                    <span>รายการ</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row padding__tb__1em">
-                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                                <span>จำนวนรายการเบิกที่รออนุมัติ </span>
-                            </div>
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <div style="float: right;font-size: 20px">
-                                    <span style="color:goldenrod">{{ordersWaitingApprove}}</span>
-                                    <span>รายการ</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row padding__tb__1em">
-                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                                <span>จำนวนรายการเบิกที่มีการค้างจ่าย </span>
-                            </div>
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <div style="float: right;font-size: 20px">
-                                    <span style="color:firebrick">{{ordersUnpaid}}</span>
-                                    <span>รายการ</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="center padding__1em">
-                <span style="font-size: 10pc">{{poApproved}}</span>
-            </div> -->
-                </div>
+            <div style="display: flex; align-items: center; justify-content: center; margin-top:1em">
+                <chart id="container" [options]="inventoryValue"></chart>
             </div>
         </div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                <span>รับเข้าคลัง/รายการเบิก</span>
+            </div>
+            <div class="card-block margin__1em">
+                <div class="row padding__tb__1em">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <span>จำนวนใบสั่งซื้อที่รอรับเข้าคลัง </span>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div style="float: right;font-size: 20px">
+                            <span style="color:chocolate">{{poApproved}}</span>
+                            <span>รายการ</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row padding__tb__1em">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <span>จำนวนรายการขอเบิก </span>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div style="float: right;font-size: 20px">
+                            <span style="color:dodgerblue">{{ordersWaiting}}</span>
+                            <span>รายการ</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row padding__tb__1em">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <span>จำนวนรายการเบิกที่รออนุมัติ </span>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div style="float: right;font-size: 20px">
+                            <span style="color:goldenrod">{{ordersWaitingApprove}}</span>
+                            <span>รายการ</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row padding__tb__1em">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <span>จำนวนรายการเบิกที่มีการค้างจ่าย </span>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div style="float: right;font-size: 20px">
+                            <span style="color:firebrick">{{ordersUnpaid}}</span>
+                            <span>รายการ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="center padding__1em">
+                <span style="font-size: 10pc">{{poApproved}}</span>
+            </div> -->
+        </div>
+    </div>
+</div>
