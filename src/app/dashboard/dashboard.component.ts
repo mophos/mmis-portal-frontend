@@ -21,6 +21,9 @@ export class DashboardComponent implements OnInit {
     const decodedToken = this.jwtHelper.decodeToken(this.token);
     this.warehouseId = decodedToken.warehouseId
     this.warehouseName = decodedToken.warehouseName
+    const accessRight = decodedToken.accessRight;
+    this.warehouseName = decodedToken.warehouseName
+    this.rights = accessRight.split(',');
   }
   myDatePickerOptions: IMyOptions = {
     inline: false,
@@ -28,6 +31,7 @@ export class DashboardComponent implements OnInit {
     editableDateField: false,
     showClearDateBtn: false
   };
+  rights: any;
   startDate: any;
   endDate: any;
   orders_data: any;
@@ -57,6 +61,12 @@ export class DashboardComponent implements OnInit {
   ordersWaiting: any;
   ordersWaitingApprove: any;
   ordersUnpaid: any;
+  Purchasing = false;
+  Planning = false;
+  Inventory = false;
+  InventoryWarehouse = false;
+  Requisition = false;
+
 
   async ngOnInit() {
     const date = new Date();
@@ -77,6 +87,11 @@ export class DashboardComponent implements OnInit {
     };
 
     moment.locale();
+    this.Purchasing = _.indexOf(this.rights, 'PO_ADMIN') === -1 ? false : true;
+    this.Planning = _.indexOf(this.rights, 'BM_ADMIN') === -1 ? false : true;
+    this.Inventory = _.indexOf(this.rights, 'WM_ADMIN') === -1 ? false : true;
+    this.InventoryWarehouse = _.indexOf(this.rights, 'WM_WAREHOUSE_ADMIN') === -1 ? false : true;
+    this.Requisition = _.indexOf(this.rights, 'WM_REQUISITION') === -1 ? false : true;
     await this.getOrderPoint();
     await this.showGraph_Orders();
     await this.getBudgetByYear();
