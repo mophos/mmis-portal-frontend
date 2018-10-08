@@ -1,6 +1,6 @@
 import { DashboardService } from './services/dashboard.service';
 import { PurchasingService } from './services/purchasing.service';
-import { BrowserModule,  } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -35,6 +35,7 @@ import '@clr/icons';
 import '@clr/icons/shapes/all-shapes';
 import { AuthModule } from './auth/auth.module';
 import { ManualComponent } from './manual/manual.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ManualComponent } from './manual/manual.component';
     AppRoutingModule,
     LoginModule,
     MyDatePickerTHModule,
-    HelperModule
+    HelperModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [
     AuthGuard,

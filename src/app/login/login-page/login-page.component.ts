@@ -7,7 +7,8 @@ import { AlertService } from '../../alert.service';
 import { JwtHelper } from 'angular2-jwt';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { environment } from '../../../environments/environment';
+// import { environment } from '../../../environments/environment';
+import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
@@ -24,11 +25,13 @@ export class LoginPageComponent implements OnInit {
     warehouses = [];
     userWarehouseId: any;
     dateTime: any;
+    deviceInfo: any;
     constructor(
         @Inject('API_URL') private url: string,
         private loginService: LoginService,
         private router: Router,
-        private alert: AlertService
+        private alert: AlertService,
+        private deviceService: DeviceDetectorService
     ) {
         this.getHospitalInfo();
         this.getVersion();
@@ -40,6 +43,9 @@ export class LoginPageComponent implements OnInit {
         if (sessionStorage.getItem('token')) {
             this.router.navigate(['portal']);
         }
+        this.deviceInfo = this.deviceService.getDeviceInfo();
+        this.deviceInfo.host = location.host
+        this.deviceInfo.url = location.href
     }
 
     enterLogin(event) {
@@ -62,7 +68,7 @@ export class LoginPageComponent implements OnInit {
 
     async doLogin() {
         this.isLogging = true;
-        const rs: any = await this.loginService.doLogin(this.username, this.password, this.userWarehouseId);
+        const rs: any = await this.loginService.doLogin(this.username, this.password, this.userWarehouseId, this.deviceInfo);
         if (rs.ok) {
             const decodedToken = this.jwtHelper.decodeToken(rs.token);
             const fullname = `${decodedToken.fullname}`;
