@@ -1,6 +1,6 @@
 import { DashboardService } from './services/dashboard.service';
 import { PurchasingService } from './services/purchasing.service';
-import { BrowserModule, } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
