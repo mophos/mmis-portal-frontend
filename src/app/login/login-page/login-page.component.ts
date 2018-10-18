@@ -44,9 +44,8 @@ export class LoginPageComponent implements OnInit {
             this.router.navigate(['portal']);
         }
         this.deviceInfo = this.deviceService.getDeviceInfo();
-        this.deviceInfo.host = location.host
-        this.deviceInfo.url = location.href
-        this.deviceInfo.version = this.version;
+        this.deviceInfo.host = location.host;
+        this.deviceInfo.url = location.href;
     }
 
     enterLogin(event) {
@@ -101,6 +100,7 @@ export class LoginPageComponent implements OnInit {
         const rs: any = await this.loginService.getVersion();
         if (rs.ok) {
             this.version = rs.version;
+            this.deviceInfo.version = this.version;
         }
     }
 
