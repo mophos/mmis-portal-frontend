@@ -23,7 +23,7 @@ export class LayoutComponent implements OnInit {
   Administrator = false;
   token: any;
   warehouseName: any;
-
+  warehouseCode: any;
   constructor(private router: Router) {
     this.fullname = sessionStorage.getItem('fullname');
   }
@@ -48,7 +48,8 @@ export class LayoutComponent implements OnInit {
     const token = sessionStorage.getItem('token');
     const decodedToken = this.jwtHelper.decodeToken(token);
     const accessRight = decodedToken.accessRight;
-    this.warehouseName = decodedToken.warehouseName
+    this.warehouseName = decodedToken.warehouseName;
+    this.warehouseCode = decodedToken.warehouseCode;
     this.rights = accessRight.split(',');
 
     this.Purchasing = _.indexOf(this.rights, 'PO_ADMIN') === -1 ? false : true;
