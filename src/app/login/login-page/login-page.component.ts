@@ -46,6 +46,7 @@ export class LoginPageComponent implements OnInit {
         this.deviceInfo = this.deviceService.getDeviceInfo();
         this.deviceInfo.host = location.host
         this.deviceInfo.url = location.href
+        this.deviceInfo.version = this.version;
     }
 
     enterLogin(event) {
@@ -77,7 +78,6 @@ export class LoginPageComponent implements OnInit {
             // hide spinner
             this.isLogging = false;
             // redirect to admin module
-            console.log(decodedToken);
             const accessRight = decodedToken.accessRight;
             const rights = accessRight.split(',');
             if (_.indexOf(rights, 'WM_WAREHOUSE_ADMIN') > -1) {
