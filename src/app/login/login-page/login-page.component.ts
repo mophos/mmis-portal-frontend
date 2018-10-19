@@ -44,8 +44,8 @@ export class LoginPageComponent implements OnInit {
             this.router.navigate(['portal']);
         }
         this.deviceInfo = this.deviceService.getDeviceInfo();
-        this.deviceInfo.host = location.host
-        this.deviceInfo.url = location.href
+        this.deviceInfo.host = location.host;
+        this.deviceInfo.url = location.href;
     }
 
     enterLogin(event) {
@@ -77,7 +77,6 @@ export class LoginPageComponent implements OnInit {
             // hide spinner
             this.isLogging = false;
             // redirect to admin module
-            console.log(decodedToken);
             const accessRight = decodedToken.accessRight;
             const rights = accessRight.split(',');
             if (_.indexOf(rights, 'WM_WAREHOUSE_ADMIN') > -1) {
@@ -101,6 +100,7 @@ export class LoginPageComponent implements OnInit {
         const rs: any = await this.loginService.getVersion();
         if (rs.ok) {
             this.version = rs.version;
+            this.deviceInfo.version = this.version;
         }
     }
 

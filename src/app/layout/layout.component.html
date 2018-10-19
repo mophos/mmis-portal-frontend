@@ -8,31 +8,38 @@
         </div>
 
         <div class="header-nav">
-            <a class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" routerLink='/portal/index' routerLinkActive='active' role="tooltip" aria-haspopup="true">
+            <a class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" routerLink='/portal/index'
+                routerLinkActive='active' role="tooltip" aria-haspopup="true">
                 <clr-icon shape="home"></clr-icon>
                 <span class="tooltip-content">Home</span>
             </a>
-            <a href="{{env.purchasingUrl}}" *ngIf="Purchasing" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+            <a href="{{env.purchasingUrl}}" *ngIf="Purchasing" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right"
+                role="tooltip" aria-haspopup="true">
                 <clr-icon shape="shopping-cart"></clr-icon>
                 <span class="tooltip-content">Purchasing</span>
             </a>
-            <a href="{{env.planningUrl}}" *ngIf="Planning" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+            <a href="{{env.planningUrl}}" *ngIf="Planning" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right"
+                role="tooltip" aria-haspopup="true">
                 <clr-icon shape="event"></clr-icon>
                 <span class="tooltip-content">Planning</span>
             </a>
-            <a href="{{env.inventoryUrl}}" *ngIf="Inventory || InventoryWarehouse" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+            <a href="{{env.inventoryUrl}}" *ngIf="Inventory || InventoryWarehouse" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right"
+                role="tooltip" aria-haspopup="true">
                 <clr-icon shape="data-cluster"></clr-icon>
                 <span class="tooltip-content">Inventory</span>
             </a>
-            <a href="{{env.materialsUrl}}" *ngIf="Materials" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+            <a href="{{env.materialsUrl}}" *ngIf="Materials" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right"
+                role="tooltip" aria-haspopup="true">
                 <clr-icon shape="storage"></clr-icon>
                 <span class="tooltip-content">Materials</span>
             </a>
-            <a href="{{env.contractsUrl}}" *ngIf="Contracts" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+            <a href="{{env.contractsUrl}}" *ngIf="Contracts" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right"
+                role="tooltip" aria-haspopup="true">
                 <clr-icon shape="scroll"></clr-icon>
                 <span class="tooltip-content">Contracts</span>
             </a>
-            <a href="{{env.umUrl}}" *ngIf="Administrator" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right" role="tooltip" aria-haspopup="true">
+            <a href="{{env.umUrl}}" *ngIf="Administrator" class=" nav-link nav-icon tooltip tooltip-md tooltip-bottom-right"
+                role="tooltip" aria-haspopup="true">
                 <clr-icon shape="cog"></clr-icon>
                 <span class="tooltip-content">Administrator</span>
             </a>
@@ -42,14 +49,24 @@
         </div>
 
         <div class="header-actions">
-            <clr-dropdown class="dropdown bottom-right">
+            <!-- <clr-dropdown class="dropdown bottom-right">
                 <button class="nav-text" clrDropdownToggle>
-                {{ fullname }} ({{warehouseName}})
-                <clr-icon shape="caret down"></clr-icon>
-            </button>
-                <div class="dropdown-menu">      
+                    {{ fullname }} ({{warehouseName}})
+                    <clr-icon shape="caret down"></clr-icon>
+                </button>
+                <div class="dropdown-menu">
                     <a (click)="logout()" clrDropdownItem>ออกจากระบบ</a>
                 </div>
+            </clr-dropdown> -->
+            <clr-dropdown>
+                <button class="nav-text" clrDropdownTrigger>
+                    {{ fullname }} ({{warehouseCode}} - {{ warehouseName }})
+                    <clr-icon shape="caret down"></clr-icon>
+                </button>
+                <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                    <!-- <a href="javascript://" (click)="openChangePasswordModal()" clrDropdownItem>เปลี่ยนรหัสผ่าน</a> -->
+                    <a href="javascript://" (click)="logout()" clrDropdownItem>ออกจากระบบ</a>
+                </clr-dropdown-menu>
             </clr-dropdown>
         </div>
     </clr-header>
