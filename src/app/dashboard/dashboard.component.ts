@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
   inven_data: any;
   showInven_cost: any;
   data_po: any = [];
+  data: any = [];
   data_po_price: any = [];
   barChartData2: any[] = [];
   _data = [];
@@ -161,6 +162,11 @@ export class DashboardComponent implements OnInit {
         else e.purchase_order_status = "ไม่ระบุ";
       });
     }
+    this._data.forEach(e => {
+      if (e) {
+        this.data.push(e)
+      }
+    });
     this.chartOptions_Orders = {
       chart: {
         plotBackgroundColor: null,
@@ -188,7 +194,7 @@ export class DashboardComponent implements OnInit {
       series: [{
         name: 'สถานะ',
         colorByPoint: true,
-        data: this._data
+        data: this.data
       }],
     };
   }
