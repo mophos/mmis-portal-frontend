@@ -18,7 +18,7 @@
                                     <div>
                                         ก่อนเตรียมใบสั่งซื้อ:
                                     </div>
-                                    <span class="label label-blue"> {{data_po[0]}} รายการ </span>
+                                    <span class="label label-blue"> {{data_po[0] || 0}} รายการ </span>
                                 </div>
                             </div>
                         </div><br>
@@ -28,7 +28,7 @@
                                     <div>
                                         เตรียมใบสั่งซื้อ:
                                     </div>
-                                    <span class="label label-blue"> {{data_po[1]}} รายการ / {{data_po_price[1]|
+                                    <span class="label label-blue"> {{data_po[1] || 0}} รายการ / {{data_po_price[1] || 0 |
                                         number:'1.2-2'}}
                                         บาท </span>
                                 </div>
@@ -40,7 +40,7 @@
                                     <div>
                                         ยืนยันการสั่งซื้อ:
                                     </div>
-                                    <span class="label label-blue"> {{data_po[2]}} รายการ / {{data_po_price[2]|
+                                    <span class="label label-blue"> {{data_po[2] || 0}} รายการ / {{data_po_price[2] || 0 |
                                         number:'1.2-2'}}
                                         บาท </span>
                                 </div>
@@ -52,7 +52,7 @@
                                     <div>
                                         อนุมัติ:
                                     </div>
-                                    <span class="label label-blue"> {{data_po[3]}} รายการ / {{data_po_price[3]|
+                                    <span class="label label-blue"> {{data_po[3] || 0}} รายการ / {{data_po_price[3] || 0 |
                                         number:'1.2-2'}}
                                         บาท </span>
                                 </div>
@@ -64,7 +64,7 @@
                                     <div>
                                         รับเข้าคลัง:
                                     </div>
-                                    <span class="label label-blue"> {{data_po[4]}} รายการ / {{data_po_price[4]|
+                                    <span class="label label-blue"> {{data_po[4] || 0}} รายการ / {{data_po_price[4] || 0 |
                                         number:'1.2-2'}}
                                         บาท </span>
                                 </div>
