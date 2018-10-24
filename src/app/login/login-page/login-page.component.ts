@@ -118,7 +118,7 @@ export class LoginPageComponent implements OnInit {
             const rs: any = await this.loginService.getLastVersion();
             if (rs) {
                 this.lastVersion = rs.name.toUpperCase();
-                this.urlVersion = rs.html_url.toUpperCase();
+                this.urlVersion = rs.html_url;
             }
         } catch (error) {
             this.lastVersion = this.version;
