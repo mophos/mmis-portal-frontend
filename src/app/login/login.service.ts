@@ -63,4 +63,10 @@ export class LoginService {
     const rs = await this.http.get(`${this.url}/login/hospital`).toPromise();
     return rs.json();
   }
+
+  async getLastVersion() {
+    const url = 'https://api.github.com/repos/mophos/mmis-docker-build/releases/latest';
+    const resp = await this.http.get(`${url}`).toPromise();
+    return resp.json();
+  }
 }

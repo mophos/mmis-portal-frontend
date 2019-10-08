@@ -18,6 +18,11 @@
                 {{hospitalName}}
                 <h5 class="hint">
                     MMIS&#174; {{version}}
+                    <div *ngIf="version != lastVersion">
+                        <clr-icon *ngIf="version != lastVersion" shape="new" class="is-solid" size="44" style="color:red">
+                        </clr-icon> {{lastVersion}} <a href="{{urlVersion}}" target="_blank">คลิก เพื่อดู
+                            รายละเอียดเวอร์ชั่นใหม่</a>
+                    </div>
                 </h5>
                 <h5 class="hint">
                     {{dateTime}}
@@ -43,7 +48,7 @@
                         Logging in...
                     </span>
                 </div>
-                <button type="button" (click)="doLogin()" class="btn btn-primary" [disabled]="!userWarehouseId || !username || !password || isLogging">LOG
+                <button type="button" style="min-height:1.5rem" (click)="doLogin()" class="btn btn-primary" [disabled]="!userWarehouseId || !username || !password || isLogging">LOG
                     IN</button>
             </div>
             <div style="margin-top: 50%;text-align: center ">

@@ -26,6 +26,8 @@ export class LoginPageComponent implements OnInit {
     userWarehouseId: any;
     dateTime: any;
     deviceInfo: any;
+    lastVersion: any;
+    urlVersion: any
     constructor(
         @Inject('API_URL') private url: string,
         private loginService: LoginService,
@@ -35,6 +37,7 @@ export class LoginPageComponent implements OnInit {
     ) {
         this.getHospitalInfo();
         this.getVersion();
+        this.getLastVersion();
         moment.locale('TH');
         this.dateTime = moment().format('DD MMMM ') + (+moment().format('YYYY') + 543) + ' ' + moment().format('HH:mm') + ' น.'
     }
@@ -96,11 +99,30 @@ export class LoginPageComponent implements OnInit {
         const url = this.url + '/pdf/HowTo(staff).pdf';
         window.open(url, '_blank');
     }
+
     async getVersion() {
-        const rs: any = await this.loginService.getVersion();
-        if (rs.ok) {
-            this.version = rs.version;
-            this.deviceInfo.version = this.version;
+        try {
+            const rs: any = await this.loginService.getVersion();
+            if (rs.ok) {
+                this.version = rs.version.toUpperCase();
+                this.deviceInfo.version = this.version.toUpperCase();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    async getLastVersion() {
+        try {
+            const rs: any = await this.loginService.getLastVersion();
+            if (rs) {
+                this.lastVersion = rs.name.toUpperCase();
+                this.urlVersion = rs.html_url;
+            }
+        } catch (error) {
+            this.lastVersion = this.version;
+            console.log(error);
         }
     }
 
