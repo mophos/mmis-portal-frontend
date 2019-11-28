@@ -6,7 +6,7 @@ export const environment = {
   inventoryUrl: '/inventory/#/',
   materialsUrl: '/material/#/',
   contractsUrl: '/contracts/#/',
-  reportUrl: '/reports/#/',
+  reportUrl: '/report/#/',
   umUrl: '/um/#/',
   umLoginUrl: '/api/um'
 };
