@@ -21,6 +21,7 @@ export class LayoutComponent implements OnInit {
   Materials = false;
   Contracts = false;
   Administrator = false;
+  Report = false;
   token: any;
   warehouseName: any;
   warehouseCode: any;
@@ -59,6 +60,7 @@ export class LayoutComponent implements OnInit {
     this.Materials = _.indexOf(this.rights, 'MM_ADMIN') === -1 ? false : true;
     this.Contracts = _.indexOf(this.rights, 'CM_ADMIN') === -1 ? false : true;
     this.Administrator = _.indexOf(this.rights, 'UM_ADMIN') === -1 ? false : true;
+    this.Report = _.indexOf(this.rights, 'RP_ADMIN') === -1 ? false : true;
     // console.log(this.rights);
     // console.log(_.indexOf(this.rights, 'PO_ADMIN'));
   }
