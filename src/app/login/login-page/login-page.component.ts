@@ -55,6 +55,16 @@ export class LoginPageComponent implements OnInit {
     verifyCode = '';
     verifyError: string = null;
     remainingAttempts: number = null;
+
+    /**
+     * ผู้ใช้ติ๊ก "จำอุปกรณ์นี้" — ค่าเริ่มต้นต้องเป็น false เสมอ
+     * เครื่องในโรงพยาบาลหลายจุดเป็นเครื่องกลาง ถ้าติ๊กมาให้ตั้งแต่แรก
+     * จะมีคนเผลอจำอุปกรณ์บนเครื่องที่ใช้ร่วมกันโดยไม่ตั้งใจ
+     */
+    rememberDevice = false;
+
+    /** ระบบเปิดให้จำอุปกรณ์หรือไม่ (SYS_2FA_TRUST_DEVICE_DAYS > 0) */
+    trustDeviceDays = 0;
     constructor(
         @Inject('API_URL') private url: string,
         private loginService: LoginService,
@@ -115,6 +125,7 @@ export class LoginPageComponent implements OnInit {
 
             // ยังต้องทำขั้นตอนความปลอดภัยต่อ
             this.preAuthToken = rs.preAuthToken;
+            this.trustDeviceDays = rs.trustDeviceDays || 0;
             this.goToStep(rs.next);
 
         } catch (error) {
@@ -145,6 +156,10 @@ export class LoginPageComponent implements OnInit {
     /** เปิด modal ให้ตรงกับขั้นตอนที่ backend บอกมา */
     private goToStep(next: string) {
         this.closeAllSteps();
+
+        // ล้างทุกครั้งที่เปิดขั้นตอนใหม่ ไม่ให้ค่าที่ติ๊กไว้รอบก่อนค้างมา
+        // เช่น กรอก OTP ผิดแล้วเริ่มใหม่ หรือผู้ใช้คนอื่นมาเข้าต่อบนเครื่องเดียวกัน
+        this.rememberDevice = false;
 
         if (next === 'change_password') {
             this.newPassword = '';
@@ -186,6 +201,8 @@ export class LoginPageComponent implements OnInit {
         this.verifyError = null;
         this.remainingAttempts = null;
         this.isProcessing = false;
+        this.rememberDevice = false;
+        this.trustDeviceDays = 0;
     }
 
     /** จัดการคำตอบของทุก step ให้เหมือนกัน: จบแล้วเข้าระบบ ไม่จบก็ไป step ถัดไป */
@@ -288,7 +305,7 @@ export class LoginPageComponent implements OnInit {
         this.setupError = null;
 
         try {
-            const rs: any = await this.loginService.confirm2fa(this.preAuthToken, this.setupCode);
+            const rs: any = await this.loginService.confirm2fa(this.preAuthToken, this.setupCode, this.rememberDevice);
             this.isProcessing = false;
 
             if (!rs.ok) {
@@ -329,7 +346,7 @@ export class LoginPageComponent implements OnInit {
         this.verifyError = null;
 
         try {
-            const rs: any = await this.loginService.verify2fa(this.preAuthToken, this.verifyCode);
+            const rs: any = await this.loginService.verify2fa(this.preAuthToken, this.verifyCode, this.rememberDevice);
             this.isProcessing = false;
 
             if (!rs.ok) {

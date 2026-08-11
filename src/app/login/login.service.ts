@@ -20,7 +20,7 @@ export class LoginService {
         // บอก backend ว่าหน้าจอนี้รองรับขั้นตอนเปลี่ยนรหัสผ่าน/2FA แล้ว
         // ถ้าไม่ส่งค่านี้ backend จะตอบ CLIENT_OUTDATED แทนที่จะส่ง preAuthToken มาให้
         supportLoginSteps: true
-      })
+      }, { withCredentials: true })
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -41,7 +41,10 @@ export class LoginService {
     });
 
     return new Promise((resolve, reject) => {
-      this.http.post(`${this.umUrl}${path}`, body, { headers: headers })
+      // withCredentials ให้เบราว์เซอร์แนบ cookie ของการจดจำอุปกรณ์มาด้วย
+      // บนเครื่องจริงเป็น same-origin อยู่แล้วจึงไม่มีผลอะไร แต่บนเครื่อง dev
+      // ที่หน้าเว็บอยู่คนละ port กับ API ถ้าไม่ใส่ cookie จะไม่ถูกส่งเลย
+      this.http.post(`${this.umUrl}${path}`, body, { headers: headers, withCredentials: true })
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -62,12 +65,18 @@ export class LoginService {
     return this.postWithPreAuth('/login/2fa/setup', preAuthToken);
   }
 
-  confirm2fa(preAuthToken: string, code: string) {
-    return this.postWithPreAuth('/login/2fa/confirm', preAuthToken, { code: code });
+  confirm2fa(preAuthToken: string, code: string, rememberDevice: boolean) {
+    return this.postWithPreAuth('/login/2fa/confirm', preAuthToken, {
+      code: code,
+      rememberDevice: rememberDevice === true
+    });
   }
 
-  verify2fa(preAuthToken: string, code: string) {
-    return this.postWithPreAuth('/login/2fa/verify', preAuthToken, { code: code });
+  verify2fa(preAuthToken: string, code: string, rememberDevice: boolean) {
+    return this.postWithPreAuth('/login/2fa/verify', preAuthToken, {
+      code: code,
+      rememberDevice: rememberDevice === true
+    });
   }
 
   searchWarehouse(username: string) {
