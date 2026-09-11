@@ -18,10 +18,17 @@
                 {{hospitalName}}
                 <h5 class="hint">
                     MMIS&#174; {{version}}
+                    <!-- มีเวอร์ชันใหม่: แสดงไอคอนเตือน เลขเวอร์ชันใหม่ และลิงก์ -->
                     <div *ngIf="version != lastVersion">
-                        <clr-icon *ngIf="version != lastVersion" shape="new" class="is-solid" size="44" style="color:red">
+                        <clr-icon shape="new" class="is-solid" size="44" style="color:red">
                         </clr-icon> {{lastVersion}} <a href="{{urlVersion}}" target="_blank">คลิก เพื่อดู
                             รายละเอียดเวอร์ชั่นใหม่</a>
+                    </div>
+                    <!-- เวอร์ชันตรงกันแล้ว: ยังกดดูรายละเอียดได้ แต่ไม่ต้องมีไอคอนเตือน
+                         เช็ค urlVersion ด้วย เพราะถ้าเรียก GitHub ไม่สำเร็จ getLastVersion()
+                         จะตั้ง lastVersion = version ทำให้เข้าเงื่อนไขนี้ทั้งที่ยังไม่มีลิงก์ -->
+                    <div *ngIf="version == lastVersion && urlVersion">
+                        <a href="{{urlVersion}}" target="_blank">คลิก เพื่อดูรายละเอียดเวอร์ชัน</a>
                     </div>
                 </h5>
                 <h5 class="hint">
